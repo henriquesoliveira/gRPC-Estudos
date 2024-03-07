@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "br.com.poc.grpc.v1.user";
+
+package br.com.poc.grpc.v1.user;
+
+service UserService {
+  rpc CreateUser(UserRequest) returns (UserResponse);
+  rpc GetAllUser(EmptyReq) returns (UserListResponse);
+  rpc GetAllUserStream(EmptyReq) returns (stream UserResponse);
+}
+
+message EmptyReq {}
+
+message UserRequest {
+  string name = 1;
+  string email = 2;
+  int32 age = 3;
+}
+
+message UserResponse {
+  int64 id = 1;
+  string name = 2;
+  string email = 3;
+  int64 age = 4;
+}
+
+message UserListResponse {
+  repeated UserResponse users = 1;
+}
